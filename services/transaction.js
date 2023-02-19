@@ -75,7 +75,7 @@ module.exports = {
 				});
 			}
 
-			const query = `SELECT token, SUM(CASE WHEN transaction_type = 'WITHDRAW' THEN (amount * -1) ELSE amount END) as amount from Transactions ${whereQuery} GROUP BY token`;
+			const query = `SELECT token, transaction_type, SUM(CASE WHEN transaction_type = 'WITHDRAW' THEN (amount * -1) ELSE amount END) as amount from Transactions ${whereQuery} GROUP BY token, transaction_type`;
 
 			const transactions = await prisma.$queryRawUnsafe(query);
 			await prisma.$disconnect();

@@ -49,9 +49,9 @@ program
 		}
 		if (str.token) queryBody.token = str.token.toUpperCase().substring(0, 4);
 
-		const tokenSymbols = await getTransactionPortofolio(queryBody);
+		const transactionData = await getTransactionPortofolio(queryBody);
 
-		const tokenSymbolsArray = tokenSymbols.transactions.map(
+		const tokenSymbolsArray = transactionData.transactions.map(
 			(token) => token.token
 		);
 
@@ -59,11 +59,17 @@ program
 
 		const Portofolio = {};
 
-		tokenSymbols.transactions.forEach((transaction) => {
+		transactionData.transactions.forEach((transaction) => {
+			const amount =
+				Portofolio[transaction.token] && Portofolio[transaction.token].balance
+					? transaction.transaction_type == "WITHDRAWAL"
+						? Portofolio[transaction.token].amount - transaction.amount
+						: Portofolio[transaction.token].amount + transaction.amount
+					: transaction.amount;
 			Portofolio[transaction.token] = {
 				token: transaction.token,
-				amount: transaction.amount,
-				balance: transaction.amount * currencyRate[transaction.token].Price.USD,
+				amount: amount,
+				balance: amount * currencyRate[transaction.token].Price.USD,
 			};
 		});
 
