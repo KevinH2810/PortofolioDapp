@@ -13,17 +13,6 @@ module.exports = {
 			return { null: null, err };
 		}
 	},
-	async createTransaction(transaction) {
-		await prisma.$connect();
-		try {
-			await prisma.transactions.create({ data: transaction });
-			await prisma.$disconnect();
-			return { result: true, null: null };
-		} catch (err) {
-			await prisma.$disconnect();
-			return { null: null, err };
-		}
-	},
 	//single transaction
 	async getTransaction(where) {
 		await prisma.$connect();
@@ -38,29 +27,17 @@ module.exports = {
 			return { null: null, err };
 		}
 	},
-	async getTransactionsData(where) {
-		await prisma.$connect();
-		try {
-			const transactions = await prisma.transactions.findMany({
-				where,
-			});
-			await prisma.$disconnect();
-			return { transactions, null: null };
-		} catch (err) {
-			await prisma.$disconnect();
-			return { null: null, err };
-		}
-	},
 	async getTransactionPortofolio({ timestamp, token }) {
 		await prisma.$connect();
 		try {
 			//sanitize token by only allows char up to 3 for current data cases
-			//timestamp is transformed from initial data so its already valid
+			//timestamp is transformed from initial date to seconds
 
 			const conditions = [];
+			const timeRange = 86400; // 1 day -> second
 			if (timestamp) {
 				conditions.push(
-					`timestamp between ${timestamp} AND (${timestamp} + 86400)`
+					`timestamp between ${timestamp} AND (${timestamp} + ${timeRange})`
 				);
 			}
 
@@ -75,7 +52,7 @@ module.exports = {
 				});
 			}
 
-			const query = `SELECT token, transaction_type, SUM(CASE WHEN transaction_type = 'WITHDRAW' THEN (amount * -1) ELSE amount END) as amount from Transactions ${whereQuery} GROUP BY token, transaction_type`;
+			const query = `SELECT token, transaction_type, SUM(amount) as amount from Transactions ${whereQuery} GROUP BY token, transaction_type`;
 
 			const transactions = await prisma.$queryRawUnsafe(query);
 			await prisma.$disconnect();

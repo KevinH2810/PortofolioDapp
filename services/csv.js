@@ -1,8 +1,7 @@
 const fs = require("fs");
 const readline = require("readline");
-const { spawn, exec, fork } = require("child_process");
+const { spawn } = require("child_process");
 const glob = require("glob");
-// const child = spawn("sqlite3", ["transactions.db"])
 const proInfinity = require("cli-infinity-progress");
 const sqlite3 = require("sqlite3").verbose();
 const { populateTransactions } = require("./transaction");
@@ -178,7 +177,6 @@ async function importCSVToSQLite() {
 							pi.stop();
 							console.error(`@stderr: ${data}`);
 							postResults.push(data);
-							// rejectImport(data)
 						});
 						child.on("close", (code) => {
 							console.log(`(i) Child process done! exited with code ${code}`);
@@ -215,20 +213,6 @@ async function importCSVToSQLite() {
 		resolve(postResults);
 	});
 }
-
-/**
- * CLI
- * (1) init >> import >> db ready
- * (2) db/data ready, exec command:
- *  a) get tx by date (date)
- *  b) get tx by token (token)
- * (3) portofolio
- *  a) get currency rate from cryptocompare
- *  b) get token balance (token)
- *    1) WD = minus, DEPO = plus
- *    2) grouping by token
- *    3) aggreate sum by token
- **/
 
 module.exports = {
 	createSQLiteTable,
