@@ -40,8 +40,6 @@ program
 	.option("-t, --token <token>", "name of the token")
 	.action(async (str, options) => {
 		const queryBody = {};
-		// 2019-09-01
-		//separate b
 		if (str.date) {
 			const date = new Date(str.date);
 			const seconds = date.getTime() / 1000; //1440516958
