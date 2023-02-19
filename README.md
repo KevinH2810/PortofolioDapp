@@ -9,8 +9,12 @@ $ git clone git@github.com:KevinH2810/PortofolioDapp.git
 $ npm i
 ```
 
-then rename the file .env.example to .env and fill out the necessary data
-(Note: make sure field CRYPTO_COMPARE_KEY is filled with your cryptocompare api key)
+## 3. CSV file
+due to the size of the csv file, please download the transactions and place the [transactions.csv](https://gist.github.com/liangzan/4436cb8b083c66b3517e7f4d80939f06#:~:text=logged%20in%20a-,CSV%20file,-.%20Write%20a%20command) file in `./files` to allows the code to import the csv to sqlite.
+
+## 4. env file
+Rename the file `.env.example` to `.env` and fill out the necessary data
+(Note: make sure field `CRYPTO_COMPARE_KEY` is filled with your cryptocompare api key)
 
 # HOW TO USAGE
 
