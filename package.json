@@ -1,23 +1,29 @@
 {
-  "name": "portofoliodapp",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/KevinH2810/PortofolioDapp.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/KevinH2810/PortofolioDapp/issues"
-  },
-  "homepage": "https://github.com/KevinH2810/PortofolioDapp#readme",
-  "dependencies": {
-    "node-pandas-js": "^1.0.7"
-  }
+	"name": "portofoliodapp",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "npx prisma db push && node index.js initData",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/KevinH2810/PortofolioDapp.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/KevinH2810/PortofolioDapp/issues"
+	},
+	"homepage": "https://github.com/KevinH2810/PortofolioDapp#readme",
+	"dependencies": {
+		"@prisma/client": "^4.10.1",
+		"axios": "^1.3.3",
+		"cli-infinity-progress": "^0.6.7",
+		"commander": "^10.0.0",
+		"node-pandas-js": "^1.0.7",
+		"prisma": "^4.10.1"
+	}
 }
