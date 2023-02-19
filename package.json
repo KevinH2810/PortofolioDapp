@@ -1,0 +1,23 @@
+{
+  "name": "portofoliodapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KevinH2810/PortofolioDapp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KevinH2810/PortofolioDapp/issues"
+  },
+  "homepage": "https://github.com/KevinH2810/PortofolioDapp#readme",
+  "dependencies": {
+    "node-pandas-js": "^1.0.7"
+  }
+}
